@@ -19,8 +19,8 @@ jobs:
     needs: [call-build, call-accept-before]
     with:
       JDK_VERSION: 17
-      gcp_project: 'trevorism-auth'
-      gcp_project_id: '20040999009'
+      gcp_project: 'trevorism-project'
+      gcp_project_id: '51970111147'
       version: '0-1-0'
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
