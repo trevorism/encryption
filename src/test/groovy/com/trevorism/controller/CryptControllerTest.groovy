@@ -10,13 +10,27 @@ class CryptControllerTest {
     void testEncryption() {
         CryptRequest cryptRequest = new CryptRequest(payload: "test payload", key: "testkey")
         CryptController cryptController = new CryptController()
-        assert "QJK6DmotcMKuw73dUyp8FbQfa+K8Z9Eb" == cryptController.encrypt(cryptRequest)
+        assert cryptController.encrypt(cryptRequest)
 
     }
 
     @Test
     void testDecryption() {
         CryptRequest cryptRequest = new CryptRequest(payload: "QJK6DmotcMKuw73dUyp8FbQfa+K8Z9Eb", key: "testkey")
+        CryptController cryptController = new CryptController()
+        assert "test payload" == cryptController.decrypt(cryptRequest)
+    }
+
+    @Test
+    void testDecryption2() {
+        CryptRequest cryptRequest = new CryptRequest(payload: "/kidNhRVhibn7NCOHYrfT1SmsFK2BCRX", key: "testkey")
+        CryptController cryptController = new CryptController()
+        assert "test payload" == cryptController.decrypt(cryptRequest)
+    }
+
+    @Test
+    void testDecryption3() {
+        CryptRequest cryptRequest = new CryptRequest(payload: "IS/zNZHtdy1/d1OmW3NwG+m5sLxzD1wr", key: "testkey")
         CryptController cryptController = new CryptController()
         assert "test payload" == cryptController.decrypt(cryptRequest)
     }

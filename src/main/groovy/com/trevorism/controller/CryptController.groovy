@@ -14,31 +14,31 @@ import org.jasypt.util.text.StrongTextEncryptor
 @Controller("/crypt")
 class CryptController {
 
-    StrongTextEncryptor encryptor = new StrongTextEncryptor()
-
     @Tag(name = "Crypt Operations")
     @Operation(summary = "Encrypt a string with a key **Secure")
-    @Post(value = "encryption", consumes = MediaType.APPLICATION_JSON, produces = MediaType.APPLICATION_JSON)
+    @Post(value = "encryption", consumes = MediaType.APPLICATION_JSON, produces = MediaType.TEXT_PLAIN)
     @Secure(value = Roles.USER, allowInternal = true)
     String encrypt(@Body CryptRequest request) {
         try{
+            StrongTextEncryptor encryptor = new StrongTextEncryptor()
             encryptor.setPassword(request.key)
             return encryptor.encrypt(request.payload)
-        }catch(Exception ignored){
-            throw new RuntimeException("Invalid encryption request")
+        }catch(Exception e){
+            throw new RuntimeException("Invalid encryption request", e)
         }
     }
 
     @Tag(name = "Crypt Operations")
     @Operation(summary = "Decrypt a string with a key **Secure")
-    @Post(value = "decryption", consumes = MediaType.APPLICATION_JSON, produces = MediaType.APPLICATION_JSON)
+    @Post(value = "decryption", consumes = MediaType.APPLICATION_JSON, produces = MediaType.TEXT_PLAIN)
     @Secure(value = Roles.USER, allowInternal = true)
     String decrypt(@Body CryptRequest request) {
         try{
+            StrongTextEncryptor encryptor = new StrongTextEncryptor()
             encryptor.setPassword(request.key)
             return encryptor.decrypt(request.payload)
-        }catch(Exception ignored){
-            throw new RuntimeException("Invalid decryption request")
+        }catch(Exception e){
+            throw new RuntimeException("Invalid decryption request", e)
         }
     }
 }
