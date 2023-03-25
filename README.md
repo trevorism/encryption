@@ -6,7 +6,7 @@
 
 Deployed to [Encryption](https://encryption.project.trevorism.com/)
 
-Current version 0-1-0
+Current version 0-2-0
 
 # How to build
 `gradle clean build`
