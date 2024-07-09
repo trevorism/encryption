@@ -20,7 +20,7 @@ jobs:
       JDK_VERSION: 17
       gcp_project: 'trevorism-project'
       gcp_project_id: '51970111147'
-      version: '0-3-0'
+      version: '0-4-0'
     secrets:
       CLIENT_ID: ${{ secrets.CLIENT_ID }}
       CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -31,3 +31,6 @@ jobs:
     needs: call-deploy
     with:
       JDK_VERSION: 17
+    secrets:
+      CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}

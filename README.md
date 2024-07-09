@@ -8,7 +8,5 @@ Encrypt and decrypt as a service. Bring your own key.
 
 Deployed to [Encryption](https://encryption.project.trevorism.com/)
 
-Current version 0.3.0
-
 # How to build
 `gradle clean build`
