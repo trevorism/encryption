@@ -1,4 +1,4 @@
-runtime: java17
+runtime: java25
 service: encryption
 entrypoint: java -jar encryption-all.jar
 handlers:

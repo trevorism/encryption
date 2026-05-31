@@ -6,6 +6,8 @@
 
 Encrypt and decrypt as a service. Bring your own key.
 
+The key is not stored (verifiable via source code), so loss of key results in loss of data.
+
 Deployed to [Encryption](https://encryption.project.trevorism.com/)
 
 # How to build
