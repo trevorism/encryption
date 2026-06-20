@@ -18,11 +18,9 @@ When(/I encrypt the text {string} with the key {string}/) { String string, Strin
     cryptResult = secureHttpClient.post("https://encryption.project.trevorism.com/crypt/encryption", gson.toJson(request))
 }
 
-
 Then(/the encrypted text is returned/) {  ->
     assert cryptResult
 }
-
 
 When(/I decrypt the text with the key {string}/) { String string ->
     CryptRequest request = new CryptRequest([payload: cryptResult, key: string])
@@ -34,11 +32,9 @@ When(/I decrypt the text with the key {string}/) { String string ->
     }
 }
 
-
 Then(/the decrypted text is returned with a value of {string}/) { String string ->
     assert decryptResult == string
 }
-
 
 Then(/an error occurs indicating the text could not be decrypted/) {  ->
     assert !decryptResult
