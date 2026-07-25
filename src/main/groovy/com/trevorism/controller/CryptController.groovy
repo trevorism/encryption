@@ -3,10 +3,12 @@ package com.trevorism.controller
 import com.trevorism.model.CryptRequest
 import com.trevorism.secure.Roles
 import com.trevorism.secure.Secure
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Post
+import io.micronaut.http.exceptions.HttpStatusException
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.jasypt.util.text.StrongTextEncryptor
@@ -24,7 +26,7 @@ class CryptController {
             encryptor.setPassword(request.key)
             return encryptor.encrypt(request.payload)
         }catch(Exception e){
-            throw new RuntimeException("Invalid encryption request", e)
+            throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Invalid encryption request")
         }
     }
 
@@ -38,7 +40,7 @@ class CryptController {
             encryptor.setPassword(request.key)
             return encryptor.decrypt(request.payload)
         }catch(Exception e){
-            throw new RuntimeException("Invalid decryption request", e)
+            throw new HttpStatusException(HttpStatus.BAD_REQUEST, "Invalid decryption request")
         }
     }
 }

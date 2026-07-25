@@ -1,8 +1,12 @@
 package com.trevorism.controller
 
 import com.trevorism.model.CryptRequest
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.exceptions.HttpStatusException
 import org.junit.jupiter.api.AssertThrows
 import org.junit.jupiter.api.Test
+
+import static org.junit.jupiter.api.Assertions.assertThrows
 
 class CryptControllerTest {
 
@@ -46,5 +50,13 @@ class CryptControllerTest {
                 cryptController.decrypt(new CryptRequest(payload: "a test payload", key: null)))
         AssertThrows.assertThrows(RuntimeException, () ->
                 cryptController.decrypt(new CryptRequest(payload: "a test payload", key: "")))
+    }
+
+    @Test
+    void testUndecryptablePayloadIsABadRequest() {
+        CryptController cryptController = new CryptController()
+        HttpStatusException exception = assertThrows(HttpStatusException, () ->
+                cryptController.decrypt(new CryptRequest(payload: "not an encrypted payload", key: "testkey")))
+        assert HttpStatus.BAD_REQUEST == exception.status
     }
 }
